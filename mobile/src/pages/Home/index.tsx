@@ -1,21 +1,60 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
+import axios from 'axios'
 import { Feather as Icon} from '@expo/vector-icons'
 import { View, ImageBackground, Text, Image, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native'
 import { RectButton, TextInput} from 'react-native-gesture-handler'
 import { useNavigation } from '@react-navigation/native'
+import RNPickerSelect from 'react-native-picker-select';
+
+interface IBGEUFResponse{
+  sigla: string
+}
+
+interface IBGECityResponse{
+  nome: string
+}
 
 const Home = () => {
     const [ uf, setUf] = useState('')
     const [ city, setCity] = useState('')
 
+    const [ufs, setUfs] = useState<string[]>([])
+    const [cities, setCities] = useState<string[]>([])
+    const [selectedUf, setSelectedUf] = useState('0')
+    const [selectedCity, setSelectedCity] = useState('0')
+
     const navigation = useNavigation()
 
     function handleNavigateToPoints(){
+      console.log(selectedUf, selectedCity)
         navigation.navigate('Points', {
-            uf,
-            city,
+            selectedUf,
+            selectedCity,
         })
     }
+
+        //EXTRA--
+        useEffect(()=>{
+          axios.get<IBGEUFResponse[]>('https://servicodados.ibge.gov.br/api/v1/localidades/estados').then(response =>{
+              const ufInitials = response.data.map(uf=>uf.sigla)
+              setUfs(ufInitials)
+          })
+      },[])
+  
+      useEffect(()=>{
+          if(selectedUf === '0'){
+              return
+          }
+          axios
+              .get<IBGECityResponse[]>(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedUf}/municipios`)
+              .then(response =>{
+                  const cityNames = response.data.map(city=>city.nome)
+  
+                  setCities(cityNames)
+              })
+          
+      },[selectedUf])
+      //--
 
     return (
         <KeyboardAvoidingView style={{flex:1}} behavior={Platform.OS === 'ios' ? 'padding': undefined}>
@@ -33,21 +72,31 @@ const Home = () => {
                 </View>
 
                 <View style={styles.footer}>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Digite a Uf"
-                        value={uf}
-                        maxLength={2}
-                        autoCapitalize="characters"
-                        autoCorrect={false}
-                        onChangeText={setUf}
+                    
+                    <RNPickerSelect
+                        placeholder={{
+                          label: 'Selecione uma UF',
+                          value: null,
+                        }}
+                        style={{...pickerSelectStyles}}
+                        value={selectedUf}
+                        onValueChange={(value) => setSelectedUf(value)}
+                        items={ufs.map(uf=>{
+                          return {label: String(uf), value: String(uf), key:String(uf)}
+                        })}
                     />
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Digite a cidade"
-                        value={city}
-                        autoCorrect={false}
-                        onChangeText={setCity}
+
+                    <RNPickerSelect
+                        placeholder={{
+                          label: 'Selecione uma cidade',
+                          value: null,
+                        }}
+                        style={{...pickerSelectStyles}}
+                        value={selectedCity}
+                        onValueChange={(value) => setSelectedCity(value)}
+                        items={cities.map(cities=>{
+                          return {label: String(cities), value: String(cities), key:String(cities)}
+                        })}
                     />
                     <RectButton style={styles.button} onPress={handleNavigateToPoints}>
                         <View style={styles.buttonIcon}>
@@ -132,6 +181,16 @@ const styles = StyleSheet.create({
       fontSize: 16,
     }
   });
+  const pickerSelectStyles = StyleSheet.create({
+    inputIOS: {
+      height: 60,
+      backgroundColor: '#FFF',
+      borderRadius: 10,
+      marginBottom: 8,
+      paddingHorizontal: 24,
+      fontSize: 16,
+    },
+});
 
 
 export default Home

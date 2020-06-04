@@ -23,13 +23,17 @@ interface Point{
 }
 
 interface Params{
-    uf: string,
-    city: string
+    selectedUf: string,
+    selectedCity: string
 }
+
+
 
 const Points = () => {
     const [items, setItems] = useState<Item[]>([])
     const [ points, setPoints] = useState<Point[]>([])
+
+
     const [ selectedItems, setSelectedItems] = useState<number[]>([])
 
     const [ initialPosition, setInitialPosition ] = useState<[number, number]>([0,0])
@@ -69,12 +73,11 @@ const Points = () => {
     useEffect(()=>{
         api.get('points', {
             params:{
-                city: routeParams.city,
-                uf: routeParams.uf,
+                city: routeParams.selectedCity,
+                uf: routeParams.selectedUf,
                 items: selectedItems
             }
         }).then(response=>{
-            console.log(response.data)
             setPoints(response.data)
         })
     },[selectedItems])
