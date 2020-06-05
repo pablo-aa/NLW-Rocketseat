@@ -1,0 +1,25 @@
+#page-sucess{
+    height: 8000px;
+    width: 100%;
+    background-color: rgb(26, 23, 31, .985);
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+}
+
+#page-sucess span svg{
+    color: rgb(0, 213, 124);
+    width: 40px;
+    height: 40px;
+}
+
+#page-sucess text{
+    color: #fff;
+    font-weight: bold;
+    font-size: 30px;
+    padding: 20px;
+}
+
