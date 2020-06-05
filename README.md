@@ -122,7 +122,15 @@ Acesso ao projeto: <a href="https://www.figma.com/file/1SxgOMojOB2zYT0Mdk28lB/">
       - 📂 mobile
         - Adição da estrutura de image_url para reconhecer o upload de imagens
         
-      
+        
+## :memo: Liceça
+
+Esse projeto está sobre a licença do MIT. Acesse a [LICENSE](https://github.com/pablo-aa/NLW-Rocketseat/blob/master/LICENSE) para detalhes.
+
+
+Feito por ![AUR](https://img.shields.io/badge/-%3Cpablo%2F%3E-%23ea004f)
+
+:wave: [Contato!](https://www.linkedin.com/in/pabloArruda/)
       
  
       
