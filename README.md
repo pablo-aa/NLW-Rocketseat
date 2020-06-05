@@ -1,3 +1,7 @@
+<h1 align="center" width="5px" height="5px" background-color="">
+ <img src="/.github/NLW1.png"  />
+</h1>
+
 # 🚀  NLW-Rocketseat
 ![AUR](https://img.shields.io/badge/-%3C%2F%3E-%23ea004f)
 ![AUR](https://img.shields.io/badge/-Web-%231a1a1a)
@@ -8,14 +12,24 @@
 
 Inspirado na semana do Meio ambiente foi desenvolvido a "Ecoleta", uma aplicação que tem por objetivo conectar produtores de resíduos a empresas ou locais que necessitam deste material.
 
+<img src="/.github/Ecoleta1.png"  />
+
 Acesso ao projeto: <a href="https://www.figma.com/file/1SxgOMojOB2zYT0Mdk28lB/"> Figma </a>
 
 ## ℹ️ Como Usar?
- 🛠  Yarn, node.js
+ 🛠  Yarn, Node.js, Expo
  
  Comandos utilizados: 
  
 <pre><code>
+
+📂 mobile (Mobile)
+  # Instalar dependências
+  $ yarn install
+  
+  # Rodar expo
+  $ expo start
+  
 📂 server (Back-end)
 
   # Instalar dependências
@@ -34,10 +48,10 @@ Acesso ao projeto: <a href="https://www.figma.com/file/1SxgOMojOB2zYT0Mdk28lB/">
  
 📂 web (Front-end)
   # Instalar dependências
-  $ npm install
+  $ yarn install
   
   # Rodar Front
-  $ npm start
+  $ yarn start
   
 </code></pre>
 
@@ -67,9 +81,48 @@ Acesso ao projeto: <a href="https://www.figma.com/file/1SxgOMojOB2zYT0Mdk28lB/">
  
   -  Implementação do front-end utilizando React.js
       -  Noções sobre componentização, estados, hooks e estruturas básicas
-  -  Utilização do 'react-router-dom' para organização das rotas
-  -  Utilização da biblioteca leaflet e react-leaflet para utilização de mapas
-  -  Utilização do axios para conexão com back-end
+  - Bibliotecas relevantes utilizadas:
+      -  React-router-dom para organização das rotas
+      -  Leaflet e react-leaflet para utilização de mapas
+      -  Axios para conexão com back-end
+  
+- #### Aula 4
 
+  - Implementação do mobile utilizando React Native
+     -  Noções sobre flexBox, estados, hook e estruturas básicas
+  - Bibliotecas relevantes utilizadas:
+      - React navigation para o controle de rotas
+      - React-native-maps para lidar com mapas na aplicação
+      - React-native-svg para lidar com imagens com extensão .svg
+      - Axios para lidar com back-end
+      - Expo-mail-composer para envio de email para pontos de coleta
+   - {Linking} do react-native para envio de mensagem no Whatsapp
+      
+      
+ __OBS__: 
+
+     Adicionalmente foi implementado um seletor de lugares na página Home para facilitar a busca e evitar erros. 
+     A implementação foi análoga ao sistema de busca feito na 📂 web.
+
+    - Recursos utilizados:
+
+     -  react-native-picker-select para contrução do seletor
+     -  API do IBGE
+      
+ - #### Aula 5
+   
+   - Melhorias na aplicação
+      - 📂 server
+        - Configuração do upload de imagens utilizando Multer para gerenciar esse armazenamento
+        - Adição da biblioteca Celebrate para verificação de dados do formulário de cadastro
+      - 📂 web
+        - Upload de imagens utilizado React-dropzone
+        
+        obs: Mudança no formato de transferência de dados (para suporte de imagens): JSON -> Multipart 
+      - 📂 mobile
+        - Adição da estrutura de image_url para reconhecer o upload de imagens
+        
+      
+      
  
       
